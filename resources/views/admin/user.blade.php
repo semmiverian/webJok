@@ -55,10 +55,21 @@
                         </td>
                         <td> 
                           @if(App\User::findOrFail($data->id)->hasRole('admin'))
-                            <p>This guys is Admin</p>
+                            <button class="btn btn-success" type="button" >
+                            <span class="badge" style="background-color:#4E8EEF"> <i class="fa fa-user"></i></span>
+                              Administrator 
+                            </button>                         
                           @endif
                            @if(App\User::findOrFail($data->id)->hasRole('staff'))
-                            <p>This guys is Staff</p>
+                             <button class="btn btn-warning" type="button" >
+                            <span class="badge" style="background-color:#9330F0"> <i class="fa fa-user"></i></span>
+                              Staff
+                            </button>
+                            @else
+                             <button class="btn btn-info" type="button" >
+                            <span class="badge" style="background-color:#C21A45"> <i class="fa fa-user"></i></span>
+                              Unvalid
+                            </button>
                           @endif
                         </td>
                       </tr>

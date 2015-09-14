@@ -5,7 +5,6 @@
       paramName:'gallery',
       maxFilesize:4, 
       acceptedFiles:'.jpg, .png, .bmp',
-      maxFiles:10,
        init: function () {
            this.on("success", function (file) {
             // Bakal muncul Popup notfi data berhasil di Upload
