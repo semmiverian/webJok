@@ -1,0 +1,45 @@
+@font-face {
+	font-family:'OpenSans';
+	src:url(../fonts/OpenSans/OpenSans-Regular.ttf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+body{
+	font-family:'OpenSans';
+	
+}
+
+@media (min-width: 360px) {
+	.carousel {
+		min-height: 600px;
+	}
+	/* Since positioning the image, we need to help out the caption */
+	.carousel-caption {
+		z-index: 10;
+	}
+	
+	/* Declare heights because of positioning of img element */
+	.carousel .item {
+		min-height: 600px;
+		background-color: #777;
+	}
+	.carousel-inner > .item > img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		min-width: 100%;
+		min-height: 600px;
+	}
+}
+
+.navbar-inner {
+    min-height: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 145px;
+    height: 100px;
+    padding-top: 0;
+}

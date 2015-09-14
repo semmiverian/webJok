@@ -1,0 +1,27 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Roles extends Model
+{
+    protected $fillable = ['name'];
+
+    public function users()
+    {
+    	return $this->belongsToMany('App\User');
+    }
+
+     public function hasUser($name)
+    {
+        # code...
+        foreach ($this->users as $user) {
+            # code...
+            if($user->name == $name){
+                return true;
+            }
+        }
+        return false;
+    }
+}
