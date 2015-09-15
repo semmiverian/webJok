@@ -42,6 +42,9 @@ Route::resource('admin','adminController');
 // User Control Route
 Route::resource('usercontrol','userControl');
 
+//validate user Route
+Route::get('validateuser/{id}','userControl@validateUser');
+
 //Upload Image Route
 Route::post('uploadavatar','adminController@UpImage');
 

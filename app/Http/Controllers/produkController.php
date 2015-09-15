@@ -21,9 +21,9 @@ class produkController extends Controller
      */
     private function addData()
     {
-        $data=new Slider();      
-        $file =Input::file('slide');
-        $image_name=time()."-slideshow-".$file->getClientOriginalName();
+        $data=new Produk();      
+        $file =Input::file('produk');
+        $image_name=time()."-produk-".$file->getClientOriginalName();
         $file->move(public_path().'/upload',$image_name);
         $data->image=$image_name;
         $data->save();
@@ -35,7 +35,7 @@ class produkController extends Controller
      */
      private function updateData($id=0)
     {
-        $data=Slider::findOrFail($id);
+        $data=Produk::findOrFail($id);
         $data->nama=Input::get('nama');
         $data->harga=Input::get('harga');
         $data->telepon=Input::get('telepon');

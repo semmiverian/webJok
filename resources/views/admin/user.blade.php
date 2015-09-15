@@ -41,6 +41,9 @@
                         <th>Nama</th>
                         <th>Email</th>
                         <th>Status</th>
+                        @if($user->hasRole('admin'))
+                        <th>Action</th>
+                        @endif
                       </tr>
                     </thead>
                     <tbody>
@@ -55,8 +58,8 @@
                         </td>
                         <td> 
                           @if(App\User::findOrFail($data->id)->hasRole('admin'))
-                            <button class="btn btn-success" type="button" >
-                            <span class="badge" style="background-color:#4E8EEF"> <i class="fa fa-user"></i></span>
+                            <button class="btn btn-primary" type="button" >
+                            <span class="badge" style="background-color:#CC1444"> <i class="fa fa-user"></i></span>
                               Administrator 
                             </button>                         
                           @endif
@@ -66,12 +69,20 @@
                               Staff
                             </button>
                             @else
-                             <button class="btn btn-info" type="button" >
-                            <span class="badge" style="background-color:#C21A45"> <i class="fa fa-user"></i></span>
+                             <button class="btn btn-success" type="button" >
+                            <span class="badge" style="background-color:#41C7ED"> <i class="fa fa-user"></i></span>
                               Unvalid
                             </button>
                           @endif
                         </td>
+                         @if($user->hasRole('admin') && App\User::findOrFail($data->id)->hasRole('staff')== false)
+                        <td>
+                          <a href="{{action('userControl@validateUser',$data->id)}}"><button class="btn bg-maroon">
+                            <span tyle="background-color:#41C7ED"> <i class="fa fa-user"></i></span>
+                            Validate User
+                           </button></a>
+                        </td>
+                        @endif
                       </tr>
                      @endforeach
                     </tbody>

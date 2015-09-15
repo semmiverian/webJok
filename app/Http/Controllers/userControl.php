@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Roles;
+use Auth;
+use App\Redirect;
 class userControl extends Controller
 {
     /**
@@ -20,7 +22,16 @@ class userControl extends Controller
         $showDefault=cmsHelp('App\User','users');
         return view('admin.user')->with($showDefault);
     }
-
+    /**
+     * Fungsi untuk memvalidasi user dari Unvalidate menjadi Staff
+     *@param int $id
+     */
+    public function validateUser($id)   
+    {
+        User::findOrFail($id)->assignRoles(2);
+      $showDefault=cmsHelp('App\User','users');
+       return Redirect('usercontrol')->with($showDefault);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -61,7 +72,7 @@ class userControl extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -73,7 +84,7 @@ class userControl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+   
     }
 
     /**
