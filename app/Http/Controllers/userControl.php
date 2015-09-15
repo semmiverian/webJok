@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Roles;
 use Auth;
+use Session;
 use App\Redirect;
 class userControl extends Controller
 {
@@ -28,8 +29,12 @@ class userControl extends Controller
      */
     public function validateUser($id)   
     {
-        User::findOrFail($id)->assignRoles(2);
-      $showDefault=cmsHelp('App\User','users');
+       // User::find($id)->assignRoles('staff');
+       $user=User::find($id);
+       $user->assignRoles(2);
+       $showDefault=cmsHelp('App\User','users');
+       Session::flash('add','$alert->name');
+       // return Redirect('usercontrol')->with($showDefault);
        return Redirect('usercontrol')->with($showDefault);
     }
     /**
@@ -95,6 +100,8 @@ class userControl extends Controller
      */
     public function destroy($id)
     {
-        //
+       User::destroy($id);
+       $showDefault=cmsHelp('App\User','users');
+       return Redirect('usercontrol')->with($showDefault);
     }
 }

@@ -11,6 +11,7 @@ class RedirectRoles
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param   string $roleName
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -19,7 +20,7 @@ class RedirectRoles
       {
         return redirect('auth/login');
       }
-      if (auth()->check() && ! auth()->user()->hasRole('admin','staff'))
+     if (auth()->check() && ! auth()->user()->hasRole('admin') && ! auth()->user()->hasRole('staff'))
         {
             return abort(411, 'Unauthorized');
         }

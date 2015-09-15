@@ -140,6 +140,5 @@ class newsController extends Controller
         News::destroy($id);
        $showDefault=cmsHelp('App\News','news');
         return Redirect('newsAdmin')->with($showDefault);   
-
     }
 }

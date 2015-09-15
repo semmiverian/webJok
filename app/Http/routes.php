@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -43,7 +43,7 @@ Route::resource('admin','adminController');
 Route::resource('usercontrol','userControl');
 
 //validate user Route
-Route::get('validateuser/{id}','userControl@validateUser');
+Route::post('validateuser/{id}','userControl@validateUser');
 
 //Upload Image Route
 Route::post('uploadavatar','adminController@UpImage');
@@ -70,5 +70,5 @@ Route::resource('newsAdmin','newsController');
 Route::resource('galleryAdmin','galleryController');
 
 Route::get('foo',function(){
-	Auth::user()->assignRoles(2);
+	// User::find(9)->assignRoles('staff');
 });

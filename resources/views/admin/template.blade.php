@@ -68,6 +68,7 @@
                                         <li><!-- start message -->
                                             <a href="#">
                                                 <div class="pull-left">
+                                                   
                                                     <!-- User Image -->
                                                     <img src="{{ asset("admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image"/>
                                                 </div>
@@ -147,18 +148,27 @@
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                             <!-- User Image Default kalau ga ada Image di Database-->
+                                 @if(!Auth::user()->image)
+                                  <img src="upload/userDefault.png"  style="width:30px;height:30px;" class="user-image" alt="User Image"/>
+                                 @else
                                 <!-- The user image in the navbar-->
                                 <img src="{{ url('/upload/',Auth::user()->image)}}" style="width:30px;height:30px;" class="user-image" alt="User Image"/>
+                                @endif
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{{Auth::user()->name}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
+                                 @if(!Auth::user()->image)
+                                  <img src="upload/userDefault.png" style="width:100px;height:100px;" class="user-image" alt="User Image"/>
+                                 @else
                                     <img src="{{ url('/upload/',Auth::user()->image)}}" style="width:100px;height:100px;" class="img-circle" alt="User Image" />
+                                 @endif   
                                     <p>
-                                       {{Auth::user()->name}} - Admin
-                                        <small>Member since  {{Auth::user()->created_at}}</small>
+                                       {{Auth::user()->name}} -  {{Auth::user()->showRoles()}}
+                                        <small>Member since  Helper</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -180,7 +190,7 @@
                                         <a href="{{action('adminController@show',$user->id)}}" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{{url('auth/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -198,10 +208,14 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ url('/upload/',Auth::user()->image)}}" style="width:60px;height:60px;" class="img-circle" alt="User Image" />
+                         @if(!Auth::user()->image)
+                             <img src="upload/userDefault.png" style="width:60px;height:60px;" class="user-image" alt="User Image"/>
+                         @else
+                            <img src="{{ url('/upload/',Auth::user()->image)}}" style="width:60px;height:60px;" class="img-circle" alt="User Image" />
+                        @endif
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p> {{Auth::user()->name}}</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>

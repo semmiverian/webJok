@@ -68,21 +68,39 @@
                             <span class="badge" style="background-color:#9330F0"> <i class="fa fa-user"></i></span>
                               Staff
                             </button>
-                            @else
+                           @elseif(!App\User::findOrFail($data->id)->hasRole('admin'))
                              <button class="btn btn-success" type="button" >
                             <span class="badge" style="background-color:#41C7ED"> <i class="fa fa-user"></i></span>
                               Unvalid
                             </button>
                           @endif
                         </td>
-                         @if($user->hasRole('admin') && App\User::findOrFail($data->id)->hasRole('staff')== false)
+                         
                         <td>
-                          <a href="{{action('userControl@validateUser',$data->id)}}"><button class="btn bg-maroon">
-                            <span tyle="background-color:#41C7ED"> <i class="fa fa-user"></i></span>
-                            Validate User
-                           </button></a>
+                            @if($user->hasRole('admin') && ! App\User::findOrFail($data->id)->hasRole('staff') 
+                                && ! App\User::findOrFail($data->id)->hasRole('admin') )
+                                <div class="validate" style="margin-bottom:1em">
+                                  {!! Form::open(['action'=>['userControl@validateUser',$data->id],'method'=>'post'])!!}
+                                   <button type="submit" class="btn bg-maroon">
+                                      <span tyle="background-color:#41C7ED"> <i class="fa fa-thumbs-o-up"></i></span>
+                                      Validate User
+                                    </button>
+                                  {!! Form::close()!!}
+                                 @endif
+                           </div>
+                           <div class="delete">
+                             @if($user->hasRole('admin') )
+                              {!! Form::open(['method'=>'DELETE','action'=>['userControl@destroy',$data->id]])!!}
+                              <button type="submit" class="btn bg-olive">
+                                <span tyle="background-color:#FA1137"> <i class="fa fa-trash-o"></i></span> 
+                                Delete User
+                              </button>
+                               {!! Form::close()!!}
+                              @endif
+                            </div>
                         </td>
-                        @endif
+
+                        
                       </tr>
                      @endforeach
                     </tbody>
@@ -98,4 +116,7 @@
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
               </div><!--COL-->
+@stop
+@section('script')
+  @include('partials.userFlash')
 @stop

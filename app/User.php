@@ -48,6 +48,7 @@ class User extends Model implements AuthenticatableContract,
     }
     public function hasRole($name)
     {
+        // return $this->roles->contains('name',$name);
         # code...
         foreach ($this->roles as $role) {
             # code...
