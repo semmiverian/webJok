@@ -1,4 +1,5 @@
 <?php
+use App\Produk;
 use App\User;
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,14 @@ Route::get('icha',function(){
 	echo "Icha";
 });
 // Produk FrontEnd Route
-Route::get('productFront','frontEndController@Produkpage');
+// Route::get('productFront','frontEndController@Produkpage');
 // Produk FrontEnd Route
 Route::get('productFront/{id}','frontEndController@ProdukDetail');
+// Produk FrontEnd Filter
+Route::get('productFront/tipe/{tipe}',function($tipe=""){
+	$produk=DB::table('produks')->where('tipe','=',$tipe)->paginate(2);
+	return view('FrontEnd.product',compact('produk'));
+});
 // News FrontEnd Route
 Route::get('news','frontEndController@newsPage');
 // Gallery FrontEnd Route
