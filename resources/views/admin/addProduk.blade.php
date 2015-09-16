@@ -21,10 +21,13 @@
                   {!! Form::label('harga','Harga Barang : ')!!}
                   {!! Form::text('harga',null,['class'=>'form-control'])!!}
               </div>
-              
               <div class="form-group">
                   {!! Form::label('detail','Detail Produk:')!!}
                   {!! Form::textarea('detail',null,['class'=>'form-control'])!!}
+              </div>
+              <div class="form-group">
+                  {!! Form::label('tipe','Tipe Mobil:')!!}
+                  {!! Form::select('tipe',$tipe,null,['class'=>'form-control']) !!} 
               </div>
               		<div class="form-group">
 			       	 	{!! Form::label('produk','Upload Produk Image:')!!}

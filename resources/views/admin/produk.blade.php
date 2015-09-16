@@ -45,6 +45,7 @@
                         <th>Detail</th>
                         <th>No Telepon</th>
                         <th>Harga</th>
+                        <th>Tipe</th>
                         <th>Image</th>
                         <th>Action</th>
                       </tr>
@@ -57,8 +58,9 @@
                         <td>{{$produk->detail}}</td>
                         <td>{{$produk->telepon}}</td>
                         <td>{{$produk->harga}}</td>
+                        <td>{{$produk->tipe}}</td>
                         <td>
-                          <img src="upload/{{$produk->image}}" class="img-thumbnail" style="width:70%;height:30%;" alt="Image">
+                          <img src="upload/{{$produk->image}}" class="img-thumbnail" style="width:480x;height:480px;" alt="Image">
                         </td>
                         <td>
                           {!! Form::open(['method'=>'get','action'=>['produkController@edit',$produk->id]])!!}
@@ -80,6 +82,7 @@
                         <th>Detail</th>
                         <th>No Telepon</th>
                         <th>Harga</th>
+                        <th>Tipe</th>
                         <th>Image</th>
                         <th>Action</th>
                       </tr>

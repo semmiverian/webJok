@@ -13,7 +13,11 @@
                   <h5 class="widget-user-desc">Administrator</h5>
                 </div>
                 <div class="widget-user-image">
+                 @if(!Auth::user()->image)
+                     <img src="upload/userDefault.png" style="width:100px;height:100px;" class="img-circle" alt="User Image"/>
+                  @else
                   <img class="img-circle"  src="{{asset("upload/$user->image") }}" style="width:100px;height:100px;"  alt="User Avatar">
+                  @endif
                 </div>
                 <div class="box-footer">
                   <div class="row">

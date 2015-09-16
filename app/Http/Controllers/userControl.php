@@ -29,6 +29,7 @@ class userControl extends Controller
      */
     public function validateUser($id)   
     {
+        
        // User::find($id)->assignRoles('staff');
        $user=User::find($id);
        $user->assignRoles(2);

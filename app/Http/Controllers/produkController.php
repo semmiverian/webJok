@@ -22,6 +22,11 @@ class produkController extends Controller
     private function addData()
     {
         $data=new Produk();      
+         $data->nama=Input::get('nama');
+        $data->harga=Input::get('harga');
+        $data->telepon=Input::get('telepon');
+        $data->detail=Input::get('detail');
+        $data->tipe=Input::get('tipe');
         $file =Input::file('produk');
         $image_name=time()."-produk-".$file->getClientOriginalName();
         $file->move(public_path().'/upload',$image_name);
@@ -40,6 +45,7 @@ class produkController extends Controller
         $data->harga=Input::get('harga');
         $data->telepon=Input::get('telepon');
         $data->detail=Input::get('detail');
+        $data->tipe=Input::get('tipe');
         $file =Input::file('produk');
         $image_name=time()."-news-".$file->getClientOriginalName();
         $file->move(public_path().'/upload',$image_name);
@@ -71,7 +77,8 @@ class produkController extends Controller
     public function create()
     {
         $showDefault=cmsHelp('App\Produk','produks');
-        return view('admin.addProduk')->with($showDefault);;
+        $tipe=Produk::lists('tipe','tipe');
+        return view('admin.addProduk',compact('tipe'))->with($showDefault);;
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateProduksTable extends Migration
             $table->string('harga');
             $table->string('telepon');
             $table->string('detail');
+            $table->string('tipe');
             $table->string('image');
             $table->timestamps();
         });
