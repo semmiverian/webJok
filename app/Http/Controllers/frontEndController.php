@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Slider;
 use App\Banner;
-use App\Produk;
-use App\News;
+use App\Contact;
 use App\Gallery;
+use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\News;
+use App\Produk;
+use App\Slider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 class frontEndController extends Controller
 {
     /**
@@ -34,6 +37,14 @@ class frontEndController extends Controller
     {
          $produk=Produk::paginate(2);
         return view('FrontEnd.product',compact('produk'));
+    }/**
+     * Fungsi buat tampilan about us
+     */
+
+    public function aboutUs()
+    {
+         
+        return view('FrontEnd.aboutUs');
     }
     /**
      * Fungsi buat nunjukin salah satu detail Produk
@@ -42,6 +53,30 @@ class frontEndController extends Controller
     {
         $navigasi=navPrevNext($id,'App\Produk');
         return view('FrontEnd.productDetail')->with($navigasi);
+    }
+    
+    /**
+     * Fungsi untuk proses contact Us
+     */
+     public function contactUs()
+    {
+        return view('FrontEnd.contactUs');
+    }
+    
+    /**
+     * Fungsi untuk Pengiriman data setelah user mengirimknan pesan
+     */
+     public function sendMessage(Request $request)
+    {
+        $contact=new Contact();
+        $contact->name=$request->get('name');
+        $contact->phone=$request->get('phone');
+        $contact->email=$request->get('email');
+        $contact->message=$request->get('message');
+        $contact->save();
+        
+        Session::flash('send','Data Berhasil di kirim');
+        return Redirect('/contactUs');
     }
     /**
      * Fungsi buat tampilin semua data News

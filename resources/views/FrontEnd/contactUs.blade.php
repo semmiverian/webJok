@@ -3,12 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CJS</title>
-	<link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" type="text/css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
+    <link href="{{asset("WEB JOK/css/bootstrap.min.css")}}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("WEB JOK/css/style.css")}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  	<script src="js/bootstrap.min.js"></script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -54,28 +51,29 @@
                     	<div class="col-lg-8">
                         	<div class="container-fluid">
                         		<h3>Send a Message</h3>
-                                <form class="form-horizontal" style="margin-top:3%;">
+                                <form class="form-horizontal" style="margin-top:3%;" method="POST" action="{{url('/sendMessage')}}">
+                                {{csrf_field()}}
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Name (required)">
+                                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Name (required)" required>
                                         </div>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+                                        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="Phone" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="E-mail (required)">
+                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="E-mail (required)" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" rows="6" id="inputPesan" placeholder="Message (required)"></textarea>
+                                            <textarea  required  name="message" class="form-control" rows="6" id="inputPesan" placeholder="Message (required)"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                            <button type="submit" class="btn btn-primary">SUBMIT</button>
                                         </div>
                                     </div>
                             	</form>
@@ -199,8 +197,11 @@
         	</div>
         </div>
     </footer>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{asset("WEB JOK/js/bootstrap.min.js")}}"></script>
+
+ <script src="{{asset("sweetalert/dist/sweetalert.min.js")}}"></script>
+ @yield('script')
 </body>
 </html>

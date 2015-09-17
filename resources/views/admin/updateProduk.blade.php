@@ -29,7 +29,11 @@
                   {!! Form::label('detail','Detail Produk:')!!}
                   {!! Form::textarea('detail',null,['class'=>'form-control'])!!}
               </div>
-                  <div class="form-group">
+                <div class="form-group">
+                  {!! Form::label('tipe','tipemobil:')!!}
+                  {!! Form::text('tipe',null,['class'=>'form-control','disabled'])!!}
+              </div>
+              <div class="form-group">
                 {!! Form::label('produk','Upload Produk Image:')!!}
                 {!! Form::file('produk')!!}
               </div>

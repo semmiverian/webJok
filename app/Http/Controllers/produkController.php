@@ -78,7 +78,7 @@ class produkController extends Controller
     {
         $showDefault=cmsHelp('App\Produk','produks');
         $tipe=Produk::lists('tipe','tipe');
-        return view('admin.addProduk',compact('tipe'))->with($showDefault);;
+        return view('admin.addProduk',compact('tipe'))->with($showDefault);
     }
 
     /**
@@ -127,8 +127,11 @@ class produkController extends Controller
     public function update(Request $request, $id)
     {
          $this->updateData($id);
-         $showDefault=cmsHelp('App\Produk','produks');
-         return Redirect('product')->with($showDefault);   
+         $user=Auth::user();
+        $data=Produk::findOrFail($id);
+        $count=DB::table(produks)->count();
+        $tipe=Produk::lists('tipe','tipe');
+        return view('admin.updateProduk',compact('user','data','count','tipe'));   
     }
 
     /**

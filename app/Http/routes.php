@@ -34,6 +34,12 @@ Route::get('gallery','frontEndController@galleryPage');
 // News Detail FrontEnd Route
 Route::get('news/{id}','frontEndController@newsDetail');
 
+// Contact Us Route
+Route::get('contactUs','frontEndController@contactUs');
+//Send Message from Contact Us Page
+Route::post('sendMessage','frontEndController@sendMessage');
+// About us Route
+Route::get('aboutus','frontEndController@aboutUs');
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -45,6 +51,16 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //Admin Route
 Route::resource('admin','adminController');
+
+// Read Mail Route
+Route::get('mail/{id}','adminController@readMail');
+
+// Send Mail Form Route
+Route::get('sendEmail/{id}','adminController@sendEmail');
+
+// Save Admin Reply
+Route::post('saveEmail','adminController@saveEmail');
+
 // User Control Route
 Route::resource('usercontrol','userControl');
 

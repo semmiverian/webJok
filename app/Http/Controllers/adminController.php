@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Contact;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Pesan;
+use App\Redirect;
 use App\User;
 use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use App\Redirect;
+use Mail;
 class adminController extends Controller
 {
     // Middleware Default sementara
@@ -27,7 +29,8 @@ class adminController extends Controller
     {
 
         $user=Auth::user();
-        return view('admin.index',compact('user'));
+        $contact=Contact::all();
+        return view('admin.index',compact('user','contact'));
     }
 
     /**
@@ -50,7 +53,49 @@ class adminController extends Controller
     {
         //
     }
+    /**
+     * Fungsi untuk read mail yang masuk dari Contact Us
+     * @param int $id 
+     */
+    public function readMail($id)
+    {
+        $user=Auth::user();
+        $data=Contact::findOrFail($id);
+        return view('admin.readMail',compact('user','data'));
+    }
+    /**
+     * Fungsi untuk Send mail yang admin kirim
+     * @param int $id 
+     */
+    public function sendEmail($id)
+    {
+        $user=Auth::user();
+        $data=Contact::findOrFail($id);
+        return view('admin.sendEmail',compact('user','data'));
+    }
+    /**
+     * Fungsi untuk Save reply yang admin kirim
+     * 
+     */
+    public function saveEmail(Request $request)
+    {
+        $testing=Contact::latest()->first();
+        
+        $pesan=new Pesan();
+        $pesan->email=$request->get('email');
+        $pesan->name=$request->get('name');
+        $pesan->message=$request->get('message');
+        $pesan->save();
 
+        $reply=Pesan::latest()->first();
+        Mail::send('emails.reply',['reply'=>$reply],function ($message)  use ($reply){
+            $message->to($reply->email)
+                    ->subject('Membalas Pertanyaan Anda');
+        });
+        $user=Auth::user();
+        $contact=Contact::all();
+        return view('admin.index',compact('user','contact'));
+    }
     /**
      * Display the specified resource.
      *

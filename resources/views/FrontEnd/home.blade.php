@@ -6,9 +6,7 @@
 	
     <link href="{{asset("WEB JOK/css/bootstrap.min.css")}}" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="{{asset("WEB JOK/css/style.css")}}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  	
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">@yield('script')
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -27,8 +25,8 @@
                 </div><!-- navbar-header -->
                 <div class="collapse navbar-collapse" id="collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li> 
+                        <li><a href="{{URL('/')}}">Home</a></li>
+                        <li><a href="{{URL('aboutus')}}">About Us</a></li> 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -42,14 +40,15 @@
                                 <li><a href="{{URL('productFront/tipe/Jazz')}}">JOK JAZZ</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Gallery</a></li> 
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{{URL('news')}}">News</a></li>
+                        <li><a href="{{URL('gallery')}}">Gallery</a></li> 
+                        <li><a href="{{URL('contactUs')}}">Contact Us</a></li>
                     </ul>        
                 </div>
             </div>
         </nav>
-	</header>
+	</header> <!-- Header Ends Here -->
+    <!-- Main Content -->
     <div style="margin-top:105px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -115,7 +114,7 @@
                     <div class="row">
                     @foreach($dataBanner as $banner)
                         <div class="col-lg-4" style="margin-bottom:2%;">
-                             <img class="img" src="{{ url('/upload/',$banner->image)}}" alt="Ad Space Available" width="170" height="130">
+                             <img class=" img2" src="{{ url('/upload/',$banner->image)}}" alt="Ad Space Available" width="170" height="130">
                         </div>
                         @endforeach
                 	</div>
@@ -158,7 +157,8 @@
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
         </div>
-    </div>
+    </div><!-- Main Contents Ends Here -->
+    <!-- Footer Starts Here -->
     <footer>
     	<div style="height:100%;background-image:url('WEB JOK/img/black_lozenge_@2X.png');margin-top:3%;">
         	<div class="container" style="color:#F9F9F9;">
@@ -232,8 +232,10 @@
         	</div>
         </div>
     </footer>
+    <!-- Footers ends here -->
 <script src="{{asset("WEB JOK/js/bootstrap.min.js")}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </body>
 </html>
