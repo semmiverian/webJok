@@ -18,7 +18,7 @@ Route::get('icha',function(){
 	echo "Icha";
 });
 // Produk FrontEnd Route
-// Route::get('productFront','frontEndController@Produkpage');
+Route::get('productFront','frontEndController@Produkpage');
 // Produk FrontEnd Route
 Route::get('productFront/{id}','frontEndController@ProdukDetail');
 // Produk FrontEnd Filter

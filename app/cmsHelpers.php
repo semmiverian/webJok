@@ -41,23 +41,26 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         $checkNext=$model::orderBy('id','desc')->first();
          // Ngecek data yang di show paling akhir atau engga
         // Kalau dia paling akhir maka tombol Next akan di Disabled
-        if($checkNext->id==$id){
-            $next=0;
-        }
-       else{
-           $next=$id+1;
-           $chek=$model::find($next);
-           if(is_null($chek)){
-            $next=$id+2;
-           }
-        }
+            if($checkNext->id==$id){
+                $next=0;
+            }else{
+                $next=$id+1;
+                while (is_null($model::find($next))){
+                    $next++;    
+                }   
+            }
+                  
+               
         // Ngecek data yang di show paling awal atau engga
         // Kalau dia paling awal maka tombol Prev akan di Disabled
         $checkPrev=$model::first();
         if($checkPrev->id==$id){
             $prev=0;
         }else{
-            $prev=$id-1;    
+            $prev=$id-1;  
+             while (is_null($model::find($prev))){
+                    $prev--;    
+                }     
         }
         return $array = array('data' =>$data ,'prev'=>$prev,'next'=>$next );
     }
