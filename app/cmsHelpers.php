@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
          $data=$model::findOrfail($id);
         $checkNext=$model::orderBy('id','desc')->first();
          // Ngecek data yang di show paling akhir atau engga
-        // Kalau dia paling akhir maka tombol Next akan di Disabled
+        // Kalau dia paling akhir maka tombol Next akan di Disabled 
             if($checkNext->id==$id){
                 $next=0;
             }else{

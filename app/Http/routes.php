@@ -91,6 +91,11 @@ Route::resource('newsAdmin','newsController');
 //Gallery Route
 Route::resource('galleryAdmin','galleryController');
 
+// About Us Route
+Route::resource('aboutUsAdmin','aboutController');
+
+//Update Deskripsi About Us
+Route::post('aboutUsAdmin/{id}','aboutController@updateDescription');
 Route::get('foo',function(){
 	// User::find(9)->assignRoles('staff');
 });

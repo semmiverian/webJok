@@ -246,6 +246,7 @@
                             <li><a href="{{action('produkController@index')}}"><i class="fa fa-picture-o"> Product </i></a> </li>
                             <li><a href="{{action('newsController@index')}}"><i class="fa fa-picture-o"> News </i></a> </li>
                             <li><a href="{{action('galleryController@index')}}"><i class="fa fa-picture-o"> Galery </i></a> </li>
+                            <li><a href="{{action('aboutController@index')}}"><i class="fa fa-picture-o"> About Us </i></a> </li>
                         </ul>
                     </li>
                 </ul><!-- /.sidebar-menu -->

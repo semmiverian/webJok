@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 class galleryController extends Controller
 {
+    // Middleware Default sementara
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
       /**
      * Helper untuk melakukan Add new Data ke dalam database
      * 

@@ -3,12 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CJS</title>
-	<link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" type="text/css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
+	
+    <link href="{{asset("WEB JOK/css/bootstrap.min.css")}}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("WEB JOK/css/style.css")}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  	<script src="js/bootstrap.min.js"></script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -50,7 +48,7 @@
         		</p>
             </div>
             <div class="col-lg-5">
-            	<img src="img/about/profile.JPG" width="auto" height="auto" class="img-thumbnail" style="width:100%;height:100%;">
+            	<img src="WEB JOK/img/about/profile.JPG" width="auto" height="auto" class="img-thumbnail" style="width:100%;height:100%;">
             </div>
         </div>
         <div class="row">
@@ -134,7 +132,8 @@
         </div>
     </footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{asset("WEB JOK/js/bootstrap.min.js")}}"></script>
 </body>
 </html>

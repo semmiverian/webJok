@@ -2,47 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\About;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Banner;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Input;
-use DB; 
 use App\Redirect;
-class bannerController extends Controller
+class aboutController extends Controller
 {
-    /**
-     * Helper untuk melakukan Add new Data ke dalam database
-     * 
-     */
-    private function addData()
-    {
-        $data=new Banner();      
-        $file =Input::file('banner');
-        $image_name=time()."-banner-".$file->getClientOriginalName();
-        $file->move(public_path().'/upload',$image_name);
-        $data->image=$image_name;
-        $data->save();
-        return true;
-    }
     /**
      * Helper untuk melakukan Update new Data ke dalam database
      * @param int $id
      */
      private function updateData($id=0)
     {
-        $data=Banner::findOrFail($id);
-        $file =Input::file('banner');
-        $image_name=time()."-banner-".$file->getClientOriginalName();
+        $data=About::findOrFail($id);
+        $file =Input::file('headline');
+        $image_name=time()."-headline-".$file->getClientOriginalName();
         $file->move(public_path().'/upload',$image_name);
-        $data->image=$image_name;
+        $data->gambar=$image_name;
         $data->save();
         return true;
     }
-   // Middleware Default sementara
+    // Middleware Default sementara
     public function __construct()
     {
         $this->middleware('admin');
@@ -54,8 +37,9 @@ class bannerController extends Controller
      */
     public function index()
     {
-        $showDefault=cmsHelp('App\Banner','banners');
-        return view('admin.banner')->with($showDefault);
+        $user=Auth::user();
+        $aboutUs=About::first();
+        return view('admin.about',compact('user','aboutUs'));
     }
 
     /**
@@ -76,10 +60,7 @@ class bannerController extends Controller
      */
     public function store(Request $request)
     {
-         $this->addData();
-         $showDefault=cmsHelp('App\Banner','banners');
-         return Redirect('banner')->with($showDefault);
-          
+        //
     }
 
     /**
@@ -90,7 +71,7 @@ class bannerController extends Controller
      */
     public function show($id)
     {
-       
+        //
     }
 
     /**
@@ -101,12 +82,11 @@ class bannerController extends Controller
      */
     public function edit($id)
     {
-         $showDefault=cmsHelpWithId($id,'App\Banner','banners');
-         return view('admin.updateBanner')->with($showDefault);
+        //
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Headline About Us
      *
      * @param  Request  $request
      * @param  int  $id
@@ -115,15 +95,22 @@ class bannerController extends Controller
     public function update(Request $request, $id)
     {
         $this->updateData($id);
-        $showDefault=cmsHelp('App\Banner','banners');
-         return Redirect('banner')->with($showDefault);   
-    }
-    public function showForm()
+        $user=Auth::user();
+        $aboutUs=About::find($id);
+        return Redirect('aboutUsAdmin')->with('user','aboutUs');
+    } 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function updateDescription(Request $request, $id)
     {
-         $showDefault=cmsHelp('App\Banner','banners');
-        return view('admin.addBanner')->with($showDefault);;
+        //
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -132,8 +119,6 @@ class bannerController extends Controller
      */
     public function destroy($id)
     {
-        Banner::destroy($id);
-        $showDefault=cmsHelp('App\Banner','banners');
-        return Redirect('banner')->with($showDefault);   
+        //
     }
 }
