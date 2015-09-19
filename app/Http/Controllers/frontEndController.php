@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\About;
 use App\Banner;
 use App\Contact;
 use App\Gallery;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Image;
 use App\News;
 use App\Produk;
 use App\Slider;
+use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -27,7 +30,8 @@ class frontEndController extends Controller
         $dataFirst=Slider::first();
         $dataBanner=Banner::all();
         $produk=Produk::paginate(2);
-        return view('FrontEnd.home',compact('dataSlider','dataFirst','dataBanner','produk'));
+        $tipe=Type::all();
+        return view('FrontEnd.home',compact('dataSlider','dataFirst','dataBanner','produk','tipe'));
     }
     /**
      * Fungsi buat tampilin semua data Produk
@@ -36,6 +40,7 @@ class frontEndController extends Controller
     public function Produkpage()
     {
          $produk=Produk::paginate(2);
+          $tipe=Type::all();
         return view('FrontEnd.product',compact('produk'));
     }/**
      * Fungsi buat tampilan about us
@@ -43,15 +48,17 @@ class frontEndController extends Controller
 
     public function aboutUs()
     {
-         
-        return view('FrontEnd.aboutUs');
+         $about=About::first();
+         $gallery=Image::all();
+          $tipe=Type::all();
+        return view('FrontEnd.aboutUs',compact('about','gallery','tipe'));
     }
     /**
      * Fungsi buat nunjukin salah satu detail Produk
      */
      public function ProdukDetail($id)
     {
-        $navigasi=navPrevNext($id,'App\Produk');
+        $navigasi=navPrevNextwithType($id,'App\Produk');
         return view('FrontEnd.productDetail')->with($navigasi);
     }
     
@@ -60,7 +67,8 @@ class frontEndController extends Controller
      */
      public function contactUs()
     {
-        return view('FrontEnd.contactUs');
+         $tipe=Type::all();
+        return view('FrontEnd.contactUs',compact('tipe'));
     }
     
     /**
@@ -84,7 +92,8 @@ class frontEndController extends Controller
      public function newsPage()
     {
          $news=News::paginate(2);
-        return view('FrontEnd.news',compact('news'));
+          $tipe=Type::all();
+        return view('FrontEnd.news',compact('news','tipe'));
     }
     
     /**
@@ -97,7 +106,8 @@ class frontEndController extends Controller
     {
         //navPreNext fungsinya ada di App/cmsHelpers
        $navigasi=navPrevNext($id,'App\News');
-        return view('FrontEnd.newsDetail')->with($navigasi);
+        $tipe=Type::all();
+        return view('FrontEnd.newsDetail',compact('tipe'))->with($navigasi);
     }
      /**
      * Fungsi buat tampilin semua data Gallery 
@@ -106,7 +116,8 @@ class frontEndController extends Controller
       public function galleryPage()
     {
          $gallery=Gallery::paginate(4);
-        return view('FrontEnd.gallery',compact('gallery'));
+          $tipe=Type::all();
+        return view('FrontEnd.gallery',compact('gallery','tipe'));
     }
     /**
      * Show the form for creating a new resource.

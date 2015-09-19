@@ -5,12 +5,29 @@ namespace App\Http\Controllers;
 use App\About;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\Input;
+use App\Image;
 use App\Redirect;
+use App\Type;
+use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 class aboutController extends Controller
 {
+
+    /**
+     * Helper untuk melakukan Add new Data ke dalam database
+     * 
+     */
+    private function addData()
+    {
+        $data=new Image();
+        $file =Input::file('gallery');
+        $image_name=time()."-gallery-".$file->getClientOriginalName();
+        $file->move(public_path().'/upload',$image_name);
+        $data->image=$image_name;
+        $data->save();
+        return true;
+    }
     /**
      * Helper untuk melakukan Update new Data ke dalam database
      * @param int $id
@@ -39,7 +56,9 @@ class aboutController extends Controller
     {
         $user=Auth::user();
         $aboutUs=About::first();
-        return view('admin.about',compact('user','aboutUs'));
+        $gallery=Image::all();
+        $tipe=Type::all();
+        return view('admin.about',compact('user','aboutUs','gallery'));
     }
 
     /**
@@ -49,7 +68,7 @@ class aboutController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -60,7 +79,12 @@ class aboutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->addData();
+        $user=Auth::user();
+        $aboutUs=About::first();
+        $gallery=Image::all();
+        return view('admin.about',compact('user','aboutUs','gallery'));
+
     }
 
     /**
@@ -97,7 +121,8 @@ class aboutController extends Controller
         $this->updateData($id);
         $user=Auth::user();
         $aboutUs=About::find($id);
-        return Redirect('aboutUsAdmin')->with('user','aboutUs');
+         $gallery=Image::all();
+        return Redirect('aboutUsAdmin')->with('user','aboutUs','gallery');
     } 
     /**
      * Update the specified resource in storage.
@@ -106,9 +131,15 @@ class aboutController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function updateDescription(Request $request, $id)
+    public function updateDescription($id)
     {
-        //
+        $user=Auth::user();
+        $aboutUs=About::find($id);
+        $aboutUs->detail=Input::get('detail');
+        $aboutUs->save();
+         $gallery=Image::all();
+        return Redirect('aboutUsAdmin')->with('user','aboutUs','gallery');
+
     }
     
     /**

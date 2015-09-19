@@ -61,7 +61,7 @@
          <h3 class="box-title">Change About Us Description </h3>
         </div><!-- Box Header -->
         <div class="box-body">
-         {!! Form::model($aboutUs,['method'=>'PATCH','action'=>['aboutController@updateDescription',$aboutUs->id]])!!}
+         {!! Form::open(['method'=>'POST','action'=>['aboutController@updateDescription',$aboutUs->id]])!!}
              <div class="form-group">
                   {!! Form::label('detail','Deskripsi About Us:')!!}
                   {!! Form::textarea('detail',null,['class'=>'form-control'])!!}
@@ -75,6 +75,40 @@
     </div><!-- Col End -->
   </div>
   
+ <!-- Gallery Add and Available -->
+
+ <div class="row">
+    <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Active Gallery Image</h3>
+        </div><!-- Box Header -->
+        <div class="box-body">
+         <div class="row">
+         @foreach($gallery as $gambar)
+           <div class="col-md-4">
+              <img src="upload/{{$gambar->image}}" class="img-responsive" alt="Gallery Image">
+           </div>
+           @endforeach
+         </div>
+        </div> <!-- Box Body -->
+      </div><!-- Box End -->
+      </div>
+      <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+         <h3 class="box-title">Add More Picture </h3>
+        </div><!-- Box Header -->
+        <div class="box-body">
+        {!! Form::open(['method'=>'POST','files'=>'true','action'=>['aboutController@store'],'class'=>'dropzone','id'=>'updateGallery'])!!}
+              <div class="dz-message">
+                    Drag atau Klik untuk otomatis upload foto
+             </div>
+          {!! Form::close() !!}
+        </div> <!-- Box Body -->
+      </div><!-- Box End -->
+    </div><!-- Col End -->
+  </div>
 
 @stop
 

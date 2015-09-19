@@ -14,17 +14,18 @@ use App\User;
 
 // Front End Controller
 Route::resource('/','frontEndController');
-Route::get('icha',function(){
-	echo "Icha";
-});
+
 // Produk FrontEnd Route
 Route::get('productFront','frontEndController@Produkpage');
+
 // Produk FrontEnd Route
 Route::get('productFront/{id}','frontEndController@ProdukDetail');
 // Produk FrontEnd Filter
-Route::get('productFront/tipe/{tipe}',function($tipe=""){
-	$produk=DB::table('produks')->where('tipe','=',$tipe)->paginate(2);
-	return view('FrontEnd.product',compact('produk'));
+Route::get('productFront/tipe/{id}',function($id=0){
+
+	$produk=App\Type::find($id)->produk()->where('type_id','=',$id)->get();
+	 $tipe=App\Type::all();
+	return view('FrontEnd.product',compact('produk','tipe'));
 });
 // News FrontEnd Route
 Route::get('news','frontEndController@newsPage');
@@ -84,7 +85,8 @@ Route::get('showFormBanner','bannerController@showForm');
 
 //Product Route
 Route::resource('product','produkController');
-
+// Add new Type for car
+Route::post('addType','produkController@addType');
 //News Route
 Route::resource('newsAdmin','newsController');
 
@@ -95,7 +97,8 @@ Route::resource('galleryAdmin','galleryController');
 Route::resource('aboutUsAdmin','aboutController');
 
 //Update Deskripsi About Us
-Route::post('aboutUsAdmin/{id}','aboutController@updateDescription');
+Route::post('aboutUsDeskripsi/{id}','aboutController@updateDescription');
+
 Route::get('foo',function(){
-	// User::find(9)->assignRoles('staff');
+	User::find(1)->assignRoles(1);
 });

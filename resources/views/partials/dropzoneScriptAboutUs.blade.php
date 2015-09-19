@@ -20,5 +20,25 @@
         });
       }
     };
+
+     Dropzone.options.updateGallery={
+      paramName:'gallery',
+      maxFilesize:4, 
+      acceptedFiles:'.jpg, .png, .bmp',
+       init: function () {
+           this.on("success", function (file) {
+            // Bakal muncul Popup notfi data berhasil di Upload
+            // Ketika user klik proceed maka akan redirect balik ke data tabel slideshow
+            swal({   title: "Gallery Image Berhasil di Update",  
+                     text: "Back To Dashboard",   
+                     type: "success",
+                       
+                     confirmButtonColor: "#1E7CFC",  
+                     confirmButtonText: "Proceed",   
+                     },
+             function(){ window.location = '/aboutUsAdmin';});
+        });
+      }
+    };
     
   </script>

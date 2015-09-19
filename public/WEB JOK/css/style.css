@@ -66,16 +66,23 @@ h4{
 	}
 }
 
-/*.navbar-inner {
-    min-height: 0px;
+/*dropdown*/
+@media screen and (max-width: 991px){
+    .column{
+        height: 200px;
+        overflow:scroll;
+    }
 }
 
-.navbar-brand,
-.navbar-nav li a {
-    line-height: 145px;
-    height: 100px;
-    padding-top: 0;
-}*/
+@media screen and (min-width: 992px){
+    .column{
+        -moz-column-count:2; /* Firefox */
+        -webkit-column-count:2; /* Safari and Chrome */
+        column-count:2;
+        width: 500px;
+    }
+}
+
 
 .dropdown-menu {
   margin-top: -1px;
@@ -169,33 +176,85 @@ a {
   color: #ffffff;
 }
 
-#icon1{
-	
-	content:url(../img/icon/wrench103.png);
-	-webkit-transition: all 1s ease;
-
+#transitionhover {
+	margin-bottom:15%;
 }
 
-#icon1:hover{
-	content:url(../img/icon/wrench103-hover.png);
-
+#transitionhover img {
+	position:absolute;
+	-webkit-transition: opacity .3s ease-in-out;
+	-moz-transition: opacity .3s ease-in-out;
+	-o-transition: opacity .3s ease-in-out;
+	transition: opacity .3s ease-in-out;
+	-khtml-transition: opacity .3s ease-in-out;
+	top:0px;
 }
 
-#icon2{
-
+#transitionhover img.top:hover {
+	opacity: 0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
 }
 
-#icon3{
-
-}
-#icon4{
-
-}
-
-#icon5{
-
+#transitionhover img.top {
+	opacity: 1.0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
 }
 
-#icon6{
+#transitionhover img.bottom:hover {
+	opacity: 1.0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+}
 
+#transitionhover img.bottom {
+	opacity: 0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+}
+
+/*untuk hover dengan font*/
+.feature-wrap {
+  margin-bottom: 35px;
+  overflow: hidden;
+}
+
+.feature-wrap h2{
+  margin-top: 10px;
+}
+
+.feature-wrap .pull-left {
+  margin-right: 25px;
+}
+
+.feature-wrap i{
+  font-size: 48px;
+  height: 110px;
+  width: 110px;
+  margin: 3px;
+  border-radius: 100%;
+  line-height: 110px;
+  text-align:center;
+  color: #ffffff;
+  border: 0.0001em solid #ffffff;
+  box-shadow: inset 0 0 0 5px #f2f2f2;
+  -webkit-box-shadow: inset 0 0 0 5px #f2f2f2;
+  -webkit-transition: 500ms;
+  -moz-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
+  float: left;
+  margin-right: 25px;
+}
+
+.feature-wrap i:hover {
+  background: #a90329;
+  color: #fff;
+  box-shadow: inset 0 0 0 5px #a90329;
+  -webkit-box-shadow: inset 0 0 0 5px #a90329;
+  border: 3px solid #ffffff;
+}
+.footerImage{
+  background-image:url('WEB JOK/img/black_lozenge_@2X.png');
 }

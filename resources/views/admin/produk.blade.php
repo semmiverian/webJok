@@ -29,6 +29,24 @@
 	                </a>
 	      </div>
       </div>
+      <div class="col-md-4">
+         <div class="box box-danger">
+        <div class="box-header with-border">
+         <h3 class="box-title">Add New Car Type </h3>
+        </div><!-- Box Header -->
+        <div class="box-body">
+        {!! Form::open(['method'=>'POST','files'=>'true','action'=>['produkController@addType']])!!}
+              <div class="form-group">
+                  {!! Form::label('type','Tipe Mobil : ')!!}
+                  {!! Form::text('type',null,['class'=>'form-control'])!!}
+              </div>
+              <div class="form-group">
+                 {!! Form::submit('Submit',['class'=>'btn btn-danger '])!!}
+                </div>
+          {!! Form::close() !!}
+        </div> <!-- Box Body -->
+      </div><!-- Box End -->
+      </div>
 
 	<div class="col-xs-12">
         		<!-- Tabel Start -->
@@ -58,7 +76,7 @@
                         <td>{{$produk->detail}}</td>
                         <td>{{$produk->telepon}}</td>
                         <td>{{$produk->harga}}</td>
-                        <td>{{$produk->tipe}}</td>
+                        <td>{{typeShow($produk->id)}}</td>
                         <td>
                           <img src="upload/{{$produk->image}}" class="img-thumbnail" style="width:480x;height:480px;" alt="Image">
                         </td>

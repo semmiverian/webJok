@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Produk;
+use App\Redirect;
+use App\Type;
 use App\User;
 use Auth;
+use DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use DB; 
-use App\Redirect;
-use App\Produk;
 
 class produkController extends Controller
 {
@@ -26,7 +26,7 @@ class produkController extends Controller
         $data->harga=Input::get('harga');
         $data->telepon=Input::get('telepon');
         $data->detail=Input::get('detail');
-        $data->tipe=Input::get('tipe');
+        $data->type_id=Input::get('tipe');
         $file =Input::file('produk');
         $image_name=time()."-produk-".$file->getClientOriginalName();
         $file->move(public_path().'/upload',$image_name);
@@ -77,7 +77,7 @@ class produkController extends Controller
     public function create()
     {
         $showDefault=cmsHelp('App\Produk','produks');
-        $tipe=Produk::lists('tipe','tipe');
+        $tipe=Type::lists('name','id');
         return view('admin.addProduk',compact('tipe'))->with($showDefault);
     }
 
@@ -90,6 +90,20 @@ class produkController extends Controller
     public function store(Request $request)
     {
          $this->addData();
+         $showDefault=cmsHelp('App\Produk','produks');
+         return Redirect('product')->with($showDefault);   
+    }   
+     /**
+     * Add new type of car.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function addType(Request $request)
+    {
+         $tipe=new Type();
+         $tipe->name=$request->get('type');
+         $tipe->save();
          $showDefault=cmsHelp('App\Produk','produks');
          return Redirect('product')->with($showDefault);   
     }

@@ -64,3 +64,43 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         }
         return $array = array('data' =>$data ,'prev'=>$prev,'next'=>$next );
     }
+    function navPrevNextwithType($id=0,$model="")
+    {
+         $data=$model::findOrfail($id);
+        $checkNext=$model::orderBy('id','desc')->first();
+         // Ngecek data yang di show paling akhir atau engga
+        // Kalau dia paling akhir maka tombol Next akan di Disabled 
+            if($checkNext->id==$id){
+                $next=0;
+            }else{
+                $next=$id+1;
+                while (is_null($model::find($next))){
+                    $next++;    
+                }   
+            }
+                  
+               
+        // Ngecek data yang di show paling awal atau engga
+        // Kalau dia paling awal maka tombol Prev akan di Disabled
+        $checkPrev=$model::first();
+        if($checkPrev->id==$id){
+            $prev=0;
+        }else{
+            $prev=$id-1;  
+             while (is_null($model::find($prev))){
+                    $prev--;    
+                }     
+        }
+        $tipe=App\Type::all();
+        return $array = array('data' =>$data ,'prev'=>$prev,'next'=>$next ,'tipe'=>$tipe );
+    }
+    /**
+     * Testing Helper
+     * @param  int $id 
+     *@
+     */
+    function typeShow($id=0)
+    {
+        $a=App\Produk::find($id)->type->name;
+        return $a;
+    }

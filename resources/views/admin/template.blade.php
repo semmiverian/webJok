@@ -42,7 +42,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo"><b>Admin</b>JOK</a>
+            <a href="{{url('/admin')}}" class="logo"><b>Admin</b>JOK</a>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">

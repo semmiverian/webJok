@@ -7,7 +7,7 @@
                   <h3 class="box-title">Membalas Email Customer</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                <form action="{{URL('saveEmail')}}" method="post">
+                <form method="post" action="{{action('adminController@saveEmail',$data->id)}}" >
                 {{csrf_field()}}
                   <div class="form-group">
                     <input class="form-control" name="email" placeholder="To:" value="{{$data->email}}" disabled>

@@ -1,59 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>CJS</title>
-	
-    <link href="{{asset("WEB JOK/css/bootstrap.min.css")}}" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" href="{{asset("WEB JOK/css/style.css")}}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-	<header>
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><img src="upload/logo.png" height="75" width="120"></a>
-                </div><!-- navbar-header -->
-                <div class="collapse navbar-collapse" id="collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{URL('/')}}">Home</a></li>
-                        <li><a href="{{URL('aboutus')}}">About Us</a></li> 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{URL('productFront/tipe/RangeRover')}}">JOK RANGE ROVER</a></li>
-                                <li><a href="{{URL('productFront/tipe/Alphard')}}">JOK ALPHARD</a></li>
-                                <li><a href="{{URL('productFront/tipe/Mercy')}}">JOK MERCY</a></li>
-                                <li><a href="{{URL('productFront/tipe/Mazda')}}">JOK MAZDA</a></li>
-                                <li><a href="{{URL('productFront/tipe/LandCruiser')}}">JOK LAND CRUISER</a></li>
-                                <li><a href="{{URL('productFront/tipe/Avanza')}}">JOK AVANZA</a></li>
-                                <li><a href="{{URL('productFront/tipe/Fortuner')}}">JOK FORTUNER</a></li>
-                                <li><a href="{{URL('productFront/tipe/Jazz')}}">JOK JAZZ</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{URL('news')}}">News</a></li>
-                        <li><a href="{{URL('gallery')}}">Gallery</a></li> 
-                        <li><a href="{{URL('contactUs')}}">Contact Us</a></li>
-                    </ul>        
-                </div>
-            </div>
-        </nav>
-	</header> <!-- Header Ends Here -->
+@extends('FrontEnd.template')
+@section('produk')
+    @foreach($tipe as $tipe)
+     <li><a href="{{URL('productFront/tipe',$tipe->id)}}">JOK {{$tipe->name}}</a></li>
+     @endforeach
+@stop
+@section('content')
     <!-- Main Content -->
     <div style="margin-top:105px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                 <li data-target="#myCarousel" data-slide-to="{{$dataFirst->id}}" class="active"></li>
+                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 @foreach($dataSlider as $slideshow)
                    <li data-target="#myCarousel" data-slide-to="{{$slideshow->id}}" ></li>
                 @endforeach
@@ -62,7 +19,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                  <img src="{{ url('/upload/',$dataFirst->image)}}" alt="{{$slideshow->id}}">
+                  <img src="{{ url('/WEB JOK/img/about/2.jpg.')}}" alt="First Data">
                 </div>
                 @foreach($dataSlider as $slideshow)
                     <div class="item">
@@ -84,16 +41,16 @@
 	</div>
     <div style="width:100%;background-color:#ffffff;color:#313131;">
     	<div class="container">
-            <div class="row" style="margin-top:5%">
+            <div class="row" style="margin-top:8%;margin-bottom:8%;">
             	<div class="col-lg-4" align="center">
                 	<br>
-                    <img class="img" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="350" height="230">
+                        <img class="img2" src="WEB JOK/img/about/depan2.jpg" alt="no image" style="border: 2px solid #f2f2f2;">
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4" align="left">
                     <h2>Welcome to CJS</h2>
                     <hr/>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default" href="{{URL('aboutus')}}" role="button">View details &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                 	<h2>Location</h2>
@@ -105,15 +62,15 @@
             </div><!-- /.row -->
         </div>
     </div>
-    <div style="height:100%;background-color:#333;margin-top:3%;">
-    	<div class="container" style="color:white;margin-bottom:3%;">
-        	<div class="row" style="margin-top:2%;">
-            	<div class="col-lg-6" align="center">
+    <div style="height:100%;" id="banner">
+        <div class="container" style="color:white;margin-bottom:3%;">
+            <div class="row" style="margin-top:2%;">
+                <div class="col-lg-6" align="center">
         			<h3>Banner</h3>
                     <hr/>
                     <div class="row">
                     @foreach($dataBanner as $banner)
-                        <div class="col-lg-4" style="margin-bottom:2%;">
+                       <div class="col-sm-4 col-xs-4" style="margin-top:2%;">
                              <img class=" img2" src="{{ url('/upload/',$banner->image)}}" alt="Ad Space Available" width="170" height="130">
                         </div>
                         @endforeach
@@ -157,85 +114,77 @@
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
         </div>
-    </div><!-- Main Contents Ends Here -->
-    <!-- Footer Starts Here -->
-    <footer>
-    	<div style="height:100%;background-image:url('WEB JOK/img/black_lozenge_@2X.png');margin-top:3%;">
-        	<div class="container" style="color:#F9F9F9;">
-            	<div class="row" style="margin-top:4%;margin-bottom:4%;">
-                	<div class="col-lg-4">
-                    	<h4>Social Media</h4>
-                        <hr>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.
-                                </p>
-                            </div>
-                            <div class="row">
-                            	<i class="fa fa-facebook fa-2x" style="margin-right:3%;"></i>
-                            	<i class="fa fa-twitter fa-2x" style="margin-right:3%;"></i>
-                                <i class="fa fa-youtube-square fa-2x" style="margin-right:3%;"></i>
-                            </div>
-                        </div>
+        <!-- Services Starts Here -->
+         <div style="width:100%;color:#ffffff;background-image:url('WEB Jok/img/grey_wash_wall.png');">
+        <div class="container" align="center">
+            <h2 style="margin-top:5%" >OUR SERVICES</h2>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row" style="margin-top:4%;margin-bottom:5%">
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-wrench103" ></i>
+                        <h2>Expert</h2>
+                        <p style="color:#E6E6E6">Kami mengerjakan semua pesanan secara profesional</p>
                     </div>
-                    <div class="col-lg-4">
-                    	<h4>Information</h4>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-agreement" ></i>
+                        <h2>Partnership</h2>
+                        <p style="color:#E6E6E6">Kami menjalin hubungan dengan perusahaan jok terkemuka yang mendukung bisnis kami</p>
                     </div>
-                    <div class="col-lg-4">
-                    	<h4>Office</h4>
-                        <hr>
-                        <div>
-                            <div class="row">
-                            	<div class="col-lg-1" style="margin-bottom:4%;">
-                                	<i class="fa fa-map-marker fa-lg"></i>
-                                </div>
-                                <div class="col-lg-11">
-                                	<p>Indonesia Raya</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-lg-1" style="margin-bottom:4%;">
-                                	<i class="fa fa-phone-square fa-lg"></i>
-                                 </div>
-                                 <div class="col-lg-11">
-                                	<p>08952xxxxx</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-lg-1" style="margin-bottom:4%;">
-                               		<i class="fa fa-envelope fa-lg"></i>
-                                </div>
-                                <div class="col-lg-11">
-                                	<p>blank@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-lg-1" style="margin-bottom:4%;">
-                                	<i class="fa fa-clock-o fa-lg"></i>
-                                </div>
-                                <div class="col-lg-11">
-                                	<p>Mon - Sat: 9:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-clock96" ></i>
+                        <h2>Time</h2>
+                        <p style="color:#E6E6E6">Selalu memberikan yang terbaik kepada customer dan menyelesaikannya tepat waktu</p>
                     </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-first31" ></i>
+                        <h2>Best Quality</h2>
+                        <p style="color:#E6E6E6">Menggunakan kualitas bahan terbaik untuk jok anda</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-speedometer10" ></i>
+                        <h2>Quick</h2>
+                        <p style="color:#E6E6E6">Selalu berusaha memberikan service terbaik kepada para customer</p>
+                    </div>
+                </div>
+                 <div class="col-md-4 col-sm-6">
+                    <div class="feature-wrap">
+                        <i class="flaticon-heart298" ></i>
+                        <h2>Favorite</h2>
+                        <p style="color:#E6E6E6">Menyediakan barang-barang yang banyak disukai customer jok</p>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div>
+    </div> <!-- Services Ends Here -->
+
+    <!-- Looks Like BreadCrumbs -->
+    <div class="container-fluid" style="background:#FEFEFE;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12" style="margin-top:2%;" align="center">
+                    <ol class="breadcrumb" style="background:none;">
+                      <li><strong>COVER JOK</strong></li>
+                      <li><strong>DOOR TRIM</strong></li>
+                      <li><strong>PLAFON</strong></li>
+                      <li><strong>BUNGKUS STIR</strong></li>
+                      <li><strong>DASHBOARD</strong></li>
+                      <li><strong>KARPET DASAR</strong></li>
+                      <li><strong>WOODEN PANEL</strong></li>
+                    </ol>
                 </div>
             </div>
         </div>
-    	<div style="height:100%;background-color:#000;color:#CCC;font-size:1em;" align="center">
-        	<div class="container">
-            	<div class="row" style="margin-top:2%;margin-bottom:1%;">
-        			<p>&copy; Copyrights 2015 AppBuild, Inc. All rights reserved.</p>
-                </div>
-        	</div>
-        </div>
-    </footer>
-    <!-- Footers ends here -->
-<script src="{{asset("WEB JOK/js/bootstrap.min.js")}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+    </div><!-- BreadCrumbs Ends Here -->
+    </div><!-- Main Contents Ends Here -->
+@stop

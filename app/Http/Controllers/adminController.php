@@ -12,6 +12,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Mail;
+use DB;
 class adminController extends Controller
 {
     // Middleware Default sementara
@@ -30,7 +31,9 @@ class adminController extends Controller
 
         $user=Auth::user();
         $contact=Contact::all();
-        return view('admin.index',compact('user','contact'));
+        $count=DB::table('pesans')->count();
+        $count2=DB::table('contacts')->count();
+        return view('admin.index',compact('user','contact','count','count2'));
     }
 
     /**
@@ -61,6 +64,7 @@ class adminController extends Controller
     {
         $user=Auth::user();
         $data=Contact::findOrFail($id);
+      
         return view('admin.readMail',compact('user','data'));
     }
     /**
@@ -71,16 +75,16 @@ class adminController extends Controller
     {
         $user=Auth::user();
         $data=Contact::findOrFail($id);
+        
         return view('admin.sendEmail',compact('user','data'));
     }
     /**
      * Fungsi untuk Save reply yang admin kirim
-     * 
+     * @param int $id
      */
     public function saveEmail(Request $request)
     {
         $testing=Contact::latest()->first();
-        
         $pesan=new Pesan();
         $pesan->email=$request->get('email');
         $pesan->name=$request->get('name');
@@ -94,7 +98,10 @@ class adminController extends Controller
         });
         $user=Auth::user();
         $contact=Contact::all();
-        return view('admin.index',compact('user','contact'));
+        $count=DB::table('pesans')->count();
+        $count2=DB::table('contacts')->count();
+        return Redirect('admin')->with('user','contact','count','count2');
+       
     }
     /**
      * Display the specified resource.
@@ -148,7 +155,9 @@ class adminController extends Controller
          $imageUpload=User::findOrFail($UserID);
          $imageUpload->image=$image_name;
          $imageUpload->save();
-         return Redirect('admin')->with('user');
+         $count=DB::table('pesans')->count();
+         $count2=DB::table('contacts')->count();
+         return Redirect('admin')->with('user','count','count2');
     }
      
 
